@@ -1,0 +1,42 @@
+<!-- views/report_order_registration_template.xml -->
+<odoo>
+  <template id="report_order_registration_template">
+    <t t-call="web.external_layout">
+      <main class="page">
+        <t t-foreach="docs" t-as="doc">
+          <div class="page">
+            <h2 style="text-align:center;">Order Registration Report</h2>
+            <hr/>
+            <p><strong>Date Registered:</strong> <t t-esc="doc.date_registered"/></p>
+            <p><strong>Order No:</strong> <t t-esc="doc.order_number.name"/></p>
+            <p><strong>Customer:</strong> <t t-esc="doc.customer_name.name"/></p>
+            <p><strong>Order Type:</strong> <t t-esc="dict(doc._fields['order_type'].selection).get(doc.order_type)"/></p>
+            <p><strong>Entered By:</strong> <t t-esc="doc.entered_by.name"/></p>
+            <p><strong>Customer Requirements:</strong></p>
+            <p><t t-esc="doc.customer_requirements"/></p>
+
+            <p><strong>Review Result:</strong> <t t-esc="doc.review_result and 'Accepted' or 'Rejected'"/></p>
+
+            <t t-if="doc.review_result">
+              <p><strong>Technical Specification Filename:</strong> <t t-esc="doc.technical_spec_filename"/></p>
+            </t>
+            <t t-if="not doc.review_result">
+              <p><strong>Rejection Reason:</strong></p>
+              <div t-if="doc.rejection_reason" t-raw="doc.rejection_reason"/>
+            </t>
+
+            <hr/>
+            <p><strong>Customer Verification Result:</strong> <t t-esc="dict(doc._fields['customer_verification_result'].selection).get(doc.customer_verification_result)"/></p>
+            <p><strong>Date Confirmed:</strong> <t t-esc="doc.date_confirmed"/></p>
+            <p><strong>Amendment Details:</strong></p>
+            <div t-if="doc.amendment_details" t-raw="doc.amendment_details"/>
+
+            <p><strong>Amendment Accepted by AZ:</strong> <t t-esc="dict(doc._fields['amendment_accepted'].selection).get(doc.amendment_accepted)"/></p>
+            <p><strong>Communicated to OM:</strong> <t t-esc="doc.communicated_to_om and 'Yes' or 'No'"/></p>
+            <p><strong>Communicated to Others:</strong> <t t-esc="doc.communicated_to_others.name"/></p>
+          </div>
+        </t>
+      </main>
+    </t>
+  </template>
+</odoo>

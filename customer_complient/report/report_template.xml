@@ -1,0 +1,68 @@
+<!-- report/report_compliant_register_template.xml -->
+<odoo>
+  <template id="report_compliant_register">
+    <t t-call="web.external_layout">
+      <t t-foreach="docs" t-as="doc">
+        <main class="page">
+          <div style="font-size: 13px;">
+
+            <h2 style="text-align:center;">Complaint Report</h2>
+            <hr/>
+
+            <p><strong>Date Received:</strong> <t t-esc="doc.date"/></p>
+            <p><strong>Complaint No:</strong> <t t-esc="doc.compliant_no"/></p>
+            <p><strong>Customer Name:</strong> <t t-esc="doc.customer_name.name"/></p>
+            <p><strong>Address:</strong> <t t-esc="doc.address"/></p>
+
+            <p><strong>Complaint Description:</strong></p>
+            <t t-if="doc.description">
+              <div t-raw="doc.description"/>
+            </t>
+
+            <p><strong>Received By:</strong> <t t-esc="doc.compliant_received.name or ''"/></p>
+            <p><strong>Job Position:</strong> <t t-esc="doc.job_position.name or ''"/></p>
+
+            <p><strong>Reason:</strong></p>
+            <t t-if="doc.reason">
+              <div t-raw="doc.reason"/>
+            </t>
+
+            <p><strong>Correction Taken:</strong> <t t-esc="doc.correction_taken.name or ''"/></p>
+            <p><strong>Correction Date:</strong> <t t-esc="doc.correction_date"/></p>
+
+            <p><strong>Corrective Action:</strong></p>
+            <t t-if="doc.corrective_action">
+              <div t-raw="doc.corrective_action"/>
+            </t>
+
+            <p><strong>Corrective Date:</strong> <t t-esc="doc.corrective_date"/></p>
+            <p><strong>Investigated By:</strong> <t t-esc="doc.investigated_by.name or ''"/></p>
+
+            <p><strong>Issue Status:</strong> <t t-esc="doc.issue_status"/></p>
+
+            <p><strong>Remarks:</strong></p>
+            <t t-if="doc.remarks">
+              <div t-raw="doc.remarks"/>
+            </t>
+
+            <br/><br/>
+            <div style="display:flex; justify-content:space-between; text-align:center;">
+              <div style="width:33%;">
+                <p></p>
+              </div>
+              <div style="width:33%;">
+                <p>Certified By:</p>
+                <p></p>
+              </div>
+              <div style="width:33%;">
+                <p>Approved By:</p>
+                <p></p>
+              </div>
+            </div>
+
+          </div> <!-- end content -->
+        </main>
+      </t>
+    </t>
+  </template>
+</odoo>
